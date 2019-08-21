@@ -1,0 +1,20 @@
+provider "digitalocean" {
+  profile	= "default"
+  region	= "lon1"
+}
+
+resource "digitalocean_droplet" "example" {
+  name	= "example"
+  image	= "ubuntu-19-04-x64"
+  region = "lon1"
+  size	= "s-1vcpu-1gb"
+
+  provisioner "local-exec" {
+    command = "echo ${digitalocean_droplet.example.ipv4_address} > ip4.txt"
+  }
+}
+
+resource "digitalocean_floating_ip" "ip" {
+  droplet_id = "${digitalocean_droplet.example.id}"
+  region     = "${digitalocean_droplet.example.region}"
+}
