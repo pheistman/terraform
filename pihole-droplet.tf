@@ -4,9 +4,3 @@ resource "digitalocean_droplet" "pihole" {
     region = "lon1"
     size  = "s-1vcpu-1gb"
 }
-
-#resource "digitalocean_floating_ip" "ip" {
-#    droplet_id = "${digitalocean_droplet.pihole.id}"
-#    region     = "${digitalocean_droplet.pihole.region}"
-#}
-
